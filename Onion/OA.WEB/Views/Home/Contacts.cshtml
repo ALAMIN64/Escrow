@@ -1,0 +1,110 @@
+﻿@model OA.WEB.Models.ViewModel.ContactVM
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_LayoutTransaction2.cshtml";
+}
+
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 90px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+    @*@media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }*@
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+        .btn2 {
+            background-color: DodgerBlue; /* Blue background */
+            border: none; /* Remove borders */
+            color: white; /* White text */
+            padding: 12px 16px; /* Some padding */
+            font-size: 16px; /* Set a font size */
+            cursor: pointer; /* Mouse pointer on hover */
+        }
+
+            /* Darker background on mouse-over */
+            .btn2:hover {
+                background-color: RoyalBlue;
+            }
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+<div class="card" style="padding-top:30px;background-color:#e4f4fb">
+    <div class="card-title">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row" style="align-content: center;">
+            <div class="col-1"></div>
+            <div class="col-10" style="background-color:white;padding: 10px;">
+                <form asp-controller="Home" asp-action="RCVContact" method="post">
+                    <h5><b>Sent us a message!</b></h5>
+                    @if (Model.ID == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        <p>We have recieved your message. We will send you email in short. Thank you!</p>
+                    }
+                    <br />
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input id="user" asp-for="FullName" required type="text" class="form-control" placeholder="Full name">
+                                <span id=""></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input id="pass" type="text" required asp-for="Email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input id="pass" type="text" required asp-for="Title" class="form-control" placeholder="Subject">
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <textarea id="pass" type="text" required asp-for="Description" class="form-control" placeholder="Your message...."></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group" style="padding-top:30px;text-align:right">
+                                <button id="submt" class="btn2 btn-lg">Sent message</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>

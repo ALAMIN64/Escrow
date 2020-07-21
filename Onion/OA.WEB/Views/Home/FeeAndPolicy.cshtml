@@ -1,0 +1,111 @@
+﻿@model IEnumerable<OA.WEB.Models.ViewModel.FeeCalculateVM>
+@{
+    ViewData["Title"] = "Escrow fee and charges";
+    Layout = "~/Views/Shared/_LayoutTransaction2.cshtml";
+}
+
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 90px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+ 
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row" style="align-content: center;padding:15px;">
+
+    <div class="col-12">
+        <div style=" background-color:azure;padding:20px;">
+            <div class="text-center">
+                <div class="form-group">
+                    <label>Calculate Escrow Fee</label>
+                    <div><input id="Amountvalue" placeholder="Enter your amount in " class="" type="number" /></div>
+                    <div><input id="btncalculate" type="button" class="btn btn-info" value="Calculate Fee" /></div>
+                    <div id="replaceDIV"></div>
+                </div>
+            </div>
+            <br />
+            <div class="text-center">
+                <h4><b>Our Discounted Processing Fee and Fee Caps</b></h4>
+                <h6>Othe things goes here</h6>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div style="padding:8px;border-radius:8px;background-color:#ffffff">
+            <div style="overflow-x:auto;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Amount Range</th>
+                            <th>Percentage(%)</th>
+                            <th>Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Amount1-@item.Amount2</td>
+                                <td>@item.Percentage %</td>
+                                <td>@item.TotalFees</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/CustomScripts/TransactionManager.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btncalculate").click(function () {
+            if ($("#Amountvalue").val() == '') {
+                AppUtil.ShowSuccessOnControl("Amount is required.", "Amountvalue","top left");
+            }
+            else {
+                TransactionManager.CalculateFee();
+            }
+
+        });
+
+    });
+
+
+
+
+
+
+</script>

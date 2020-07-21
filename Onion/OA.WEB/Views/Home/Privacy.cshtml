@@ -1,0 +1,68 @@
+﻿@model OA.WEB.Models.ViewModel.PolicyVM
+@{
+    ViewData["Title"] = "Privacy & Policy";
+    Layout = "~/Views/Shared/_LayoutTransaction2.cshtml";
+}
+
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 50px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+    @*@media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }*@
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row" style="align-content: center;padding:15px;">
+
+    @if (Model != null)
+    {
+        <div class="col-12">
+            <div style=" background-color:azure;padding:20px;">
+                <div class="text-center">
+                    <h4><b>@Model.Title</b></h4>
+                </div>
+                <br />
+                <div style="padding:40px">
+                    <h6>@Model.Description</h6>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-12">
+            Not set yet
+        </div>
+    }
+</div>

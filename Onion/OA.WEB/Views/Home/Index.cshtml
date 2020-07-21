@@ -1,0 +1,72 @@
+﻿@model IEnumerable<OA.DATA.Entities.HomeContent>
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_LayoutCommon.cshtml";
+
+}
+
+<div class="intro-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+            <div class="col-lg-8 mr-auto" data-aos="fade-up">
+                <h3 style="color:white">NEVER BUY OR SELL ONLINE WITHOUT USING US.</h3>
+                <p class="">With payguardex.com you can buy and sell anything safely without the risk of quality compromise or non delivery.</p>
+                <p><a href="/Transaction/Create" class="btn btn-lg btn-success">Get Started Now</a></p>
+            </div>
+
+            <div class="col-lg-4 mr-auto" data-aos="fade-up">
+                <div class="align-text-top text-center">
+                    <img src="~/logoIcon-removebg-preview.png" height="280" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5" style="padding-top:20px">
+            <div class="mb-5">
+                <h2 class="section-title">
+                    BUY WITHOUT RISK
+                </h2>
+                <p>You do not have to send money to the seller as funds are kept in escrow on a secure bank account.</p>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="image-absolute-box">
+                <div class="box" data-aos="fade-up">
+                    <div class="icon-wrap"><span class="flaticon-vector"></span></div>
+                    <h3>Secure Payments</h3>
+                    <p>Using payguardex, buyers get to inspect the goods or services before accepting them, protecting the buyer. Likewise, sellers are protected from counterparty risk by no chargeback, ever.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding-top:190px">
+
+</div>
+<div class="container">
+    <div class="row">
+        @if (Model != null)
+        {
+
+            @foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col-lg-12 mb-5">
+                        <div>
+                            @Html.Raw(item.Title)
+                        </div>
+                        <div>
+                            @Html.Raw(item.Desciption)
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

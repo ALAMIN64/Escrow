@@ -1,0 +1,188 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<OA.DATA.Entities.ApplicationUser> SignInManager
+@inject UserManager<OA.DATA.Entities.ApplicationUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"]-Payguardex</title>
+    <link rel="icon" href="~/Logoff.png" type="image/gif" sizes="16x16">
+
+    <link rel="stylesheet" href="~/Admin/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Admin/vendors/base/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Admin/css/style.css">
+    <link href="~/lib/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/Client/img/Logodd.png" />
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/lib/jquery-ui1.12.1.js"></script>
+    <script src="~/CustomScripts/AppUtil.js"></script>
+    <script src="~/CustomScripts/ImageManager.js"></script>
+    <style>
+        .btn-circle {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            line-height: 1.428571429;
+            border-radius: 15px;
+        }
+        .img-circle{
+            border-radius:10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="horizontal-menu">
+            <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                <div class="container-fluid">
+                    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+                        <ul class="navbar-nav navbar-nav-left">
+                            <li class="nav-item ml-0 mr-5 d-lg-flex d-none">
+                                <a href="#" class="nav-link horizontal-nav-left-menu"><i class="mdi mdi-format-list-bulleted"></i></a>
+                            </li>
+
+                        </ul>
+                        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+
+                            <a class="navbar-brand brand-logo" href="~/Admin/index.html"><img src="~/TextLogo.png" height="25" /></a>
+                          
+                        </div>
+                        <ul class="navbar-nav navbar-nav-right">
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item nav-profile dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                                        <span class="nav-profile-name">@user.FirstName @user.LastName</span>
+                                        <span class="online-status"></span>
+                                        <img src="~/Admin/images.png" class="img-circle"/>
+                                        @*<img src="~/Admin/images/faces/face28.png" alt="profile" />*@
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                                        <form method="post" asp-controller="Account" asp-action="Logout" id="formlogout">
+                                            <a class="dropdown-item" href="/Account/Profiles">
+                                                <i class="mdi mdi-settings text-primary"></i>
+                                                Profile
+                                            </a>
+                                            <a class="dropdown-item" id="logoutbtn">
+                                                <i class="mdi mdi-logout text-primary"></i>
+                                                Logout
+                                            </a>
+                                        </form>
+                                    </div>
+                                </li>
+                            }
+
+                                            </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <nav class="bottom-navbar">
+                <div class="container">
+                    <ul class="nav page-navigation">
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Manage/Dashboard">
+                                <i class="mdi mdi-file-document-box menu-icon"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/UserManage/UserList" class="nav-link">
+                                <i class="mdi mdi-account-plus-outline menu-icon menu-icon"></i>
+                                <span class="menu-title">Users</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/UserManage/EmployeeList" class="nav-link">
+                                <i class="mdi mdi-nature-people menu-icon"></i>
+                                <span class="menu-title">Employee</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="mdi mdi-cube-outline menu-icon"></i>
+                                <span class="menu-title">Transactions</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="submenu">
+                                <ul>
+
+                                    <li class="nav-item"><a class="nav-link" href="/ManageTR/Index">All Transaction</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/ManageTR/Expired">Expired</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/ManagePayment/Index" class="nav-link">
+                                <i class="mdi mdi-cash menu-icon"></i>
+                                <span class="menu-title">Payments</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="mdi mdi-comment-eye-outline menu-icon"></i>
+                                <span class="menu-title">Utilites</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="submenu">
+                                <ul>
+                                    <li class="nav-item"><a class="nav-link" href="/Utility/About">About Page</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Utility/Terms">Terms & Conditions</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Utility/Policy">Privacy & Policy</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Utility/HomeContent">Home Content</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Utility/FeeCalcucate">Fee Calculate</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Utility/Contacts">View Contacts</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Process/Page">Process</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+                <footer class="footer">
+                    <div class="footer-wrap">
+                        <div class="w-100 clearfix">
+                            <span class="d-block text-center text-sm-left d-sm-inline-block">Copyright © @DateTime.Now.Year Pay Guardex. All rights reserved.</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Template <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash</a></span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/notify.js"></script>
+    <script src="~/Admin/js/template.js"></script>
+    <script src="~/Scripts/jquery.dataTables.1.10.10.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#logoutbtn").click(function (e) {
+                $("#formlogout").submit();
+            });
+        });
+    </script>
+</body>
+
+</html>

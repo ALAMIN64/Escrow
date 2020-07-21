@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12 flex-column d-flex stretch-card">
+        <div class="row">
+            <div class="col-lg-6 d-flex grid-margin stretch-card">
+                <div class="card sale-diffrence-border">
+                    <div class="card-body">
+                        <h2 class="text-dark mb-2 font-weight-bold">@ViewBag.Employee</h2>
+                        <h4 class="card-title mb-2">Employee</h4>
+                        <small class="text-muted">@DateTime.Now.Year</small>
+                    </div>
+                </div>
+            </div>          
+            <div class="col-lg-6 d-flex grid-margin stretch-card">
+                <div class="card sale-diffrence-border">
+                    <div class="card-body">
+                        <h2 class="text-dark mb-2 font-weight-bold">@ViewBag.Seller</h2>
+                        <h4 class="card-title mb-2">Seller</h4>
+                        <small class="text-muted">@DateTime.Now.Year</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+   
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h2 class="text-danger font-weight-bold">@ViewBag.allTransaction</h2>
+                    <i class="mdi mdi-refresh mdi-18px text-dark"></i>
+                </div>
+            </div>
+            <canvas id="allProducts"></canvas>
+            <div class="line-chart-row-title">All Transactions</div>
+        </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h2 class="text-info font-weight-bold">@ViewBag.pendingTransaction</h2>
+                    <i class="mdi mdi-file-document-outline mdi-18px text-dark"></i>
+                </div>
+            </div>
+            <canvas id="invoices"></canvas>
+            <div class="line-chart-row-title">Pending Payment</div>
+        </div>
+    </div>
+   
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h2 class="text-dark font-weight-bold">@ViewBag.allPayment</h2>
+                    <i class="mdi mdi-cash text-dark mdi-18px"></i>
+                </div>
+            </div>
+            <canvas id="transactions"></canvas>
+            <div class="line-chart-row-title">All Payment</div>
+        </div>
+    </div>
+</div>

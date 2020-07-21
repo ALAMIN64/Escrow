@@ -1,0 +1,347 @@
+﻿@model OA.WEB.Models.ViewModel.TransactionDetails
+
+@{
+    ViewData["Title"] = "View Transaction";
+    Layout = "~/Views/Shared/_LayoutTransaction.cshtml";
+}
+
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 50px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+    @*@media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }*@
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+
+<div class="card" style="padding-top:30px;background-color:#e4f4fb">
+    <div class="card-title">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row" style="align-content: center;">
+            <div class="col-1"></div>
+            <div class="col-10" style="background-color:white;padding: 10px;">
+                <div style="">
+                    <div class="row" style="padding:12px">
+                        <div class="col-7"> <h6 style="color:darkblue">Transaction Code: @Model.LinkCode</h6> </div>
+                        <div class="col-5" style="text-align:right">@Html.Raw(Model.Status)</div>
+                    </div>
+                </div>
+                @if (Model.statusID != 1)
+                {
+                    <div id="divReplace">
+                        <form asp-controller="Transaction" asp-action="UpdateStatus" method="post" id="formid">
+                            @Html.HiddenFor(item => Model.TransactionID)
+                            <div class="col-12">
+                                @Html.DropDownList("statusID", (SelectList)ViewBag.StatusEs, "Select Status", new { @class = "form-control cutomtextbox", @required = "required", @style = "border-color:red;" })
+                            </div>
+                            <div class="col-12">
+                                <button onclick="changeStaus()" class="btn btn-block btn-outline-primary">Update Status</button>
+                            </div>
+                        </form>
+                    </div>
+                }
+
+                <div class="col-12">
+                    <div style="background-color:white;padding:12px;font-size:12px;">
+                        <div>
+                            <div class="row" style="padding:12px">
+                                <div class="col-7"> <h7 style="color:black">Seller Informations</h7> </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr hidden></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Seller Name</td>
+                                    @if (Model.SellerName == null)
+                                    {
+                                        <td>Not set</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.SellerName</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Email Address</td>
+
+                                    <td>@Model.SellerEmail</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div style="background-color:white;padding:12px;font-size:12px">
+                        <div>
+                            <div class="row" style="padding:12px">
+                                <div class="col-7"> <h7 style="color:black">Buyer Informations</h7> </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr hidden></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Buyer Name</td>
+                                    @if (Model.FirstName == null)
+                                    {
+                                        <td>Not set</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.FirstName @Model.LastName</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Email Address</td>
+
+                                    <td>@Model.BuyerEmail</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div style="background-color:white;padding:12px;font-size:12px">
+                        <div>
+                            <div class="row" style="padding:12px">
+                                <div class="col-7"> <h7 style="color:black">Product Informations</h7> </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr hidden></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Item Name</td>
+
+
+                                    <td>@Model.ItemName</td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+
+                                    <td>@Model.DescriptionOfItem</td>
+                                </tr>
+                                <tr>
+                                    <td>Terms of return</td>
+
+                                    <td>@Model.TermsOfReturns</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                @if (Model.ProductImageUrl != null)
+                {
+                    <div class="col-12">
+                        <div style="background-color:white;padding:12px;font-size:12px">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr hidden></tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>Product Images</td>
+
+                                        <td><img src="@Url.Content(Model.ProductImageUrl)" height="100" width="160" /> </td>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                }
+                @if (Model.ProductImageUrl1 != null)
+                {
+                    <div class="col-12">
+                        <div style="background-color:white;padding:12px;font-size:12px">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr hidden></tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>Product Images</td>
+
+                                        <td><img src="@Url.Content(Model.ProductImageUrl1)" height="100" width="160" /> </td>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                }
+                @if (Model.ProductImageUrl2 != null)
+                {
+                    <div class="col-12">
+                        <div style="background-color:white;padding:12px;font-size:12px">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr hidden></tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>Product Images</td>
+
+                                        <td><img src="@Url.Content(Model.ProductImageUrl2)" height="100" width="160" /> </td>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                }
+                @if (Model.ProductImageUrl3 != null)
+                {
+                    <div class="col-12">
+                        <div style="background-color:white;padding:12px;font-size:12px">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr hidden></tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>Product Images</td>
+
+                                        <td><img src="@Url.Content(Model.ProductImageUrl3)" height="100" width="160" /> </td>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                }
+
+
+
+                <div class="col-12">
+                    <div style="background-color:white;padding:12px;font-size:12px">
+                        <div>
+                            <div class="row" style="padding:12px">
+                                <div class="col-7"> <h7 style="color:black">Transaction Informations</h7> </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr hidden></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Transaction ID</td>
+                                    <td>@Model.TransactionID</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Delivery Type</td>
+
+                                    <td>@Model.DeliveryType</td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery Fee</td>
+                                    @if (Model.Deliveryfee == null)
+                                    {
+                                        <td>0.00</td>
+
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.Deliveryfee</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Delivery Time</td>
+
+                                    <td>@Model.DeliveryTime days</td>
+                                </tr>
+                                <tr>
+                                    <td>Amount</td>
+
+                                    <td>@Model.Amount</td>
+                                </tr>
+                                <tr>
+                                    <td>Escrow Fee</td>
+
+                                    <td>@Model.escrowfee</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Fee</td>
+
+                                    <td>@Model.Totalfee</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>
+<div>
+</div>
+<script>
+    function changeStaus() {
+        $("#formid").submit();
+        $("#divReplace").empty();
+        $("#divReplace").append("<div class=\"text-center\"><h5 style=\"color:red\">Please wait this could take sometime.</h5></div>");
+
+    }
+</script>

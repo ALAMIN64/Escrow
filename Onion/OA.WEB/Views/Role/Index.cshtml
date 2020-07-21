@@ -1,0 +1,18 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Role" asp-action="SaveRole" method="post" class="form-horizontal" role="form">
+    <div class="sign-in-htm">
+        <div class="group">
+            <label for="user" class="label">Role Name</label>
+            <input id="user" asp-for="Name" required type="text" class="input">
+        </div>
+        <div class="group">
+            <input type="submit" class="button" value="Save">
+        </div>
+    </div>
+</form>

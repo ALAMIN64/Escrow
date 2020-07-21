@@ -1,0 +1,104 @@
+﻿@model OA.WEB.Models.AccountModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 50px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+    @*@media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }*@
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+<div class="card" style="padding-top:30px;background-color:#c4d7ff">
+    <div class="card-title">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row" style="align-content: center;">
+            <div class="col-1"></div>
+            <div class="col-10" style="background-color:white;padding: 10px; font-size:small">
+                <form asp-controller="Account" asp-action="Register" method="post">
+                    <h6><strong>Sign up to Pay Guardex</strong></h6>
+                    <br />
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="user" class="text-capitalize">First Name</label>
+                                <input id="user" asp-for="FirstName" required type="text" class="form-control" placeholder="First Name">
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="user" class="text-capitalize">Last Name</label>
+                                <input id="user" asp-for="LastName" required type="text" class="form-control" placeholder="Last Name">
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user" class="text-capitalize">EMAIL ADDRESS</label>
+                        <input id="user" asp-for="Email" required type="text" class="form-control" placeholder="Your email address">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass" class="text-capitalize">PASSWORD</label>
+                        <input id="pass" type="password" required asp-for="Password" class="form-control" data-type="password" placeholder="Password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass" class="text-capitalize">RETYPE PASSWORD</label>
+                        <input id="pass" type="password" required asp-for="PasswordConfirmation" class="form-control" data-type="password" placeholder="Confirm password">
+                        <span asp-validation-for="PasswordConfirmation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(model => Model.ReturnUrl)
+                    </div>
+                    <div class="form-group" style="padding-top:30px">
+                        <input type="submit" class="btn btn-block" value="Sign Up" style="color:white;height:35px;background-color:#1b8a1d">
+                    </div>
+                    <div class="form-group">
+                        By registering you agree to <a href="/Home/Terms" style="color:blue">terms of using Pay Guardex</a> and <a href="/Home/Policy" style="color:blue">privacy and policy</a> of Pay Guardex
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                            <p>Already have an account? <a href="/account/login" style="color:blue">Login here.</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>

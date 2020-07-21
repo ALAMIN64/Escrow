@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<OA.DATA.Entities.ApplicationUser> SignInManager
+@inject UserManager<OA.DATA.Entities.ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="img-circle" height="40" src="~/pngtree-user-icon-isolated-on-abstract-background-png-image_1824979.jpg" />        @*Dropdown link*@
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-item">
+                <img class="img-circle" height="60" src="~/pngtree-user-icon-isolated-on-abstract-background-png-image_1824979.jpg" />
+            </div>
+            <a class="dropdown-item" style="color:red;"><b><i>Asif Rabbani hasib</i></b></a>
+            <a class="dropdown-item" href="#" style="color:darkcyan"><b>My Profile</b></a>
+            <form class="form-inline" asp-controller="Account" asp-action="Logout">
+                <button type="submit" class="dropdown-item" style="color:darkcyan">Log out</button>
+            </form>
+        </div>
+    </li>
+</ul>
+
+@*@if (SignInManager.IsSignedIn(User))
+{*@
+    @*<ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                <img class="img-circle" height="40" src="~/pngtree-user-icon-isolated-on-abstract-background-png-image_1824979.jpg" />    
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-item">
+                    <img class="img-circle" height="60" src="~/pngtree-user-icon-isolated-on-abstract-background-png-image_1824979.jpg" />
+                </div>
+                <a class="dropdown-item" style="color:red;"><b><i>Asif Rabbani hasib</i></b></a>
+                <a class="dropdown-item" href="#" style="color:darkcyan"><b>My Profile</b></a>
+                <form class="form-inline" asp-controller="Account" asp-action="Logout">
+                    <button type="submit" class="dropdown-item" style="color:darkcyan">Log out</button>
+                </form>
+            </div>
+        </li>
+    </ul>*@
+@*}
+else
+{*@
+    @*<ul class="navbar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-controller="Account" asp-action="Login">Register</a>
+        </li>
+    </ul>
+}*@
+
+@*<div class="header-dropdown card media--hidden@tablet" data-target="user-menu">
+        <div class="header-dropdown-content">
+            <div class="header-dropdown-content-icon">
+                <span class="header-dropdown-avatar avatar avatar--large avatar--light" data-e2e-target="header-dropdown-avatar">a</span>
+            </div>
+            <div class="header-dropdown-content-copy">
+
+                <span class="header-dropdown-userName" data-e2e-target="header-dropdown-userName">Asif Hasib</span>
+                <span class="header-dropdown-userEmail" data-e2e-target="header-dropdown-email">asif.shikde.ar@gmail.com</span>
+            </div>
+        </div>
+        <nav class="header-dropdown-nav">
+            <ul class="header-dropdown-nav-list">
+
+                <li class="header-dropdown-nav-item">
+                    <a href="https://www.escrow.com/account-info" class="header-dropdown-nav-link" data-e2e-target="header-dropdown-my-profile" data-tracking-section="header" data-tracking-label="my-profile">
+                        My Profile
+                        <span class="header-dropdown-nav-arrow"><svg width="8" height="13" viewBox="0 0 8 13" xmlns="http://www.w3.org/2000/svg" class=""><g fill="none" fill-rule="evenodd"><path fill-opacity=".4" fill="#000" d="M.59 11.34l4.58-4.59L.59 2.16 2 .75l6 6-6 6"></path><path d="M-8-5.25h24v24H-8"></path></g></svg></span>
+                    </a>
+                </li>
+                <li class="header-dropdown-nav-item">
+                    <a href="https://www.escrow.com/#" class="header-dropdown-nav-link" data-e2e-target="header-dropdown-sign-out" data-tracking-section="header" data-tracking-label="sign-out" data-target="logout">
+                        Sign out
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>*@

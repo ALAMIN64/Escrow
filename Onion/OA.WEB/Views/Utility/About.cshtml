@@ -1,0 +1,188 @@
+﻿@model IEnumerable<OA.WEB.Models.ViewModel.AboutVM>
+
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.AntiForgeryToken()
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"> About Us</h4>
+            <p class="card-description">
+                About us is the display content in about us page dynamically
+            </p>
+            <div class="table-responsive pt-3">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th hidden>
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th style="width:25%"><a href="#" id="createNew" style="color:red">Create New</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td hidden>
+                                    @Html.HiddenFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    <button onclick="showForEdit(@item.ID)" class="btn btn-sm btn-outline-success btn-circle mdi mdi-circle-edit-outline"></button>
+                                    <button onclick="showForDelete(@item.ID)" class="btn btn-sm btn-outline-danger btn-circle mdi mdi-trash-can-outline"></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="mdlAddNew" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-lg modal-dialog" role="document" style="width: 75%">
+                    <div class="modal-content">
+                        <div class="modal-header" ">
+                            <h3 class="modal-title">Add about information</h3>
+                            <button type="button" id="addClose" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="">
+                            <p style="color:darkorange">Please delete all before add!</p>
+                            <div>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="titleAdd" class="form-control" placeholder="Title" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextArea("descriptionAdd",new {@class="form-control", @placeholder="Description" })
+                                    @*<textarea id="descriptionAdd" class="form-control" placeholder="Description"></textarea>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="addConfirm" class="btn btn-primary">Save</button>
+                            <button type="button" id="addCancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="mdlUpdate" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-lg modal-dialog" role="document" style="width: 75%">
+                    <div class="modal-content">
+                        <div class="modal-header" ">
+                            <h3 class="modal-title">Update about information</h3>
+                            <button type="button" id="updateClose" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="">
+                            <div>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Hidden("UpddateID")
+                                    <input id="titleUpdate" class="form-control" placeholder="Title" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="descriptionUpdate" class="form-control" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="UpdateConfirm" class="btn btn-primary">Update</button>
+                            <button type="button" id="UpdateCancel" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="mdlDelete" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-lg modal-dialog" role="document" style="width: 75%">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:orangered;color:white">
+                            <h3 class="modal-title">Delete</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="">
+                            @Html.Hidden("deleteID")
+                            Are you sure to delete? No data can be recover in future.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="deleteConfirm" class="btn btn-primary">Delete</button>
+                            <button type="button" id="deleteCancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../CustomScripts/AboutManager.js"></script>
+
+<script>
+    //var _id = $(this).closest("tr").find("td:eq(0) input").val();
+    $(document).ready(function () {
+        $("#createNew").click(function (e) {
+            e.preventDefault();
+            $("#mdlAddNew").modal("show");
+        });
+        $("#addConfirm").click(function (e) {
+            if (AboutManager.CreateValidation() === true) {
+                AboutManager.InsertAbout();
+            }
+        });
+        $("#addCancel,addClose").click(function (e) {
+            AboutManager.clearSaveInformation();
+            $("#mdlAddNew").modal("hide");
+        });
+
+        $("#UpdateConfirm").click(function (e) {
+            if (AboutManager.UpdateValidation() === true) {
+                AboutManager.UpdateAbout();
+            }
+        });
+        $("#UpdateCancel,updateClose").click(function (e) {
+            AboutManager.clearUpdateInformation();
+            $("#mdlUpdate").modal("hide");
+        });
+        $("#deleteConfirm").click(function (e) {
+            AboutManager.DeleteAbout();
+        });
+        $("#deleteCancel").click(function (e) {
+            $("#mdlDelete").modal("hide");
+        });
+    });
+    function showForEdit(_id) {
+        AboutManager.GetForUpdate(_id);
+    }
+    function showForDelete(_id) {
+        $("#deleteID").val(_id);
+        $("#mdlDelete").modal("show");
+    }
+</script>

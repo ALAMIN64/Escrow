@@ -1,0 +1,157 @@
+﻿@model OA.WEB.Models.ViewModel.PaymentVM
+@{
+    ViewData["Title"] = "Add Payment";
+    Layout = "~/Views/Shared/_LayoutTransaction2.cshtml";
+}
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 90px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+    @*@media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }*@
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+<div class="card" style="padding-top:30px;background-color:#e4f4fb">
+    <div class="card-title">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row" style="align-content: center;">
+            <div class="col-1"></div>
+            <div class="col-10" style="background-color:white;padding: 10px;">
+                <div style="background-color:#01426a">
+                    <div class="row" style="padding:12px">
+                        <div class="col-12"> <h6 style="color:white">Transaction ID: @Model.LinkID</h6> </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div><p>Please provide us your bank transaction documents with Payguardex. We will need your account number to verify transaction. Also please provide printed copy or picture of your documents. </p></div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">@Html.HiddenFor(s=>Model.LinkID)
+                            <label class="control-label">Amount</label>
+                            <input class="form-control" asp-for="Amount" placeholder="Amount" type="number" disabled />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Account Number</label>
+                            <input class="form-control" asp-for="AccountNumber" placeholder="Account Number"  required/>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Bank Name</label>
+                            <input class="form-control" asp-for="BankName" placeholder="Bank Name" required/>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Description</label>
+                            <input class="form-control" asp-for="Description" placeholder="Description" />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label"><b>Upload products(Maximum 3 files)</b></label>
+                            <br />
+                            <input id="browse" type="file" name="files" multiple required>
+                            <div id="preview" style="padding:4px"></div>
+                            <div id="previewRemove" style="padding:4px"> </div>
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-center" id="remve">
+                            <input  type="button" id="Submit" class="btn btn-block btn-primary" value="Submit"/>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-center">
+                            <div id="confirmDiv">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>
+
+<script src="~/CustomScripts/PaymentManager.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#browse").change(function (e) {
+            var files = e.target.files;
+            var totalfiles = document.getElementById('browse').files.length;
+            if (totalfiles > 3) {
+                var templates = '<p style="color:red">Maximum 3 files allowed.</p>';
+                $("#previewRemove").append(templates);
+                $("#browse").val("");
+            }
+            else {
+                $.each(files, function (i, file) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function (e) {
+
+                        var template = '<div style="padding:10px;"><img  height="100" width="130" src="' + e.target.result + '"/></div>';
+                        $("#preview").append(template);
+                    };
+                });
+                $("#previewRemove").empty();
+                var templates = '<button onclick="ImageManager.RemoveContentMultiple()" class="btn btn-danger">Clear all</button>';
+                $("#previewRemove").append(templates);
+            }
+
+        });
+        $("#Submit").click(function (e) {
+            if (PaymentManager.CreateValidation() === true) {
+                $("#confirmDiv").empty();
+                PaymentManager.AddPayment();
+            }
+        });
+       
+    });
+
+
+
+
+
+
+</script>
+
+

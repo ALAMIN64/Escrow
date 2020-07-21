@@ -1,0 +1,90 @@
+﻿@model OA.WEB.Models.ViewModel.FindModel
+@{
+    ViewData["Title"] = "Find Transaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 90px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+    @*@media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }*@
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+
+<div class="card" style="padding-top:30px;background-color:white">
+    <div class="card-title">
+        <div class="col-sm-12 text-center">
+            <h4 class="text-black">Find transaction by transaction secret code.</h4> 
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="text-center" style="padding:20px">
+            <h6>Do you have secrect code of your transaction? Please paste or type it on the text box and hit the find button</h6>
+            <form asp-controller="MyTransaction" asp-action="TransactionView" id="formglg" method="get">
+                <div class="row">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input asp-for="Code" class="form-control" placeholder="Transaction code" />
+                                <div id="err" class="text-danger"></div>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#" onclick="btnsbmt()" class="btn btn-lg btn-outline-success">Find Transaction</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function btnsbmt(e) {
+        if ($("#Code").val() === "00000000-0000-0000-0000-000000000000") {
+            $("#err").empty();
+            $("#err").append("<p><b>Please enter the code</b></p>");
+        }
+        else {
+            $("#formglg").submit();
+        }
+    
+    }
+</script>

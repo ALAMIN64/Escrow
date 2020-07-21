@@ -1,0 +1,135 @@
+﻿@model OA.DATA.Entities.ApplicationUser
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<head>
+    <style>
+        .span30 {
+            padding-left: 30px;
+        }
+        .box-smaller {
+            height: 25px;
+        }
+        .box-md {
+            height: 35px;
+        }
+
+        .intro-section1 {
+            position: relative;
+        }
+
+            .intro-section1, .intro-section1 .container .row {
+                min-height: 90px;
+                background-color: #01426a;
+            }
+
+        .intro-section:before {
+            content: "";
+            position: absolute;
+            height: 10%;
+            width: 100%;
+            border-bottom-right-radius: 0px;
+        }
+
+        @*@media (max-width: 991.98px) {
+            .intro-section:before {
+                width: 100%;
+            }
+        }
+
+        *@
+        .intro-section1 h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .intro-section1 p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.1rem;
+            max-width: 400px;
+        }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+
+    </div>
+</div>
+<div class="container" style="background-color:#c7ebeb">
+    <div style="padding:15px;">
+        <div class="row" style="background-color:white">
+            <div class="col-md-12">
+                <div>
+                    <div class="row" style="padding:12px">
+                        <div class="col-7">
+                            @if (Model.FirstName == null)
+                            {
+                                <h6 style="color:darkblue">Not set</h6>
+
+                            }
+                            else
+                            {
+                                <h6 style="color:darkblue">@Model.FirstName @Model.LastName :</h6>
+                            }
+                        </div>
+                    
+                        <div class="col-5" style="text-align:right"> <a href="/Account/EditProfile" class="btn btn-outline-success">Edit Profile</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <div style="background-color:white;padding:12px;font-size:12px">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr hidden></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Your Name</td>
+                                    @if (Model.FirstName == null)
+                                    {
+                                        <td>Not set</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.FirstName @Model.LastName</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Email Address</td>
+
+                                    <td>@Model.Email</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    @if (Model.PhoneNumber == null)
+                                    {
+                                        <td>Not set</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.PhoneNumber</td>
+
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div>
+                    <div class="row" style="padding:12px">
+                        <div class="col-12" style="text-align:center"><a href="/account/ChangePassword" class="btn btn-outline-success">Change Password</a></div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>

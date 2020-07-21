@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>10178a94-b961-4d6b-94ff-8339b5dccfd6</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\Client\csxs\**" />
+    <Compile Remove="wwwroot\Client\fonxts\**" />
+    <Compile Remove="wwwroot\Client\imxages\**" />
+    <Compile Remove="wwwroot\Client\jszz\**" />
+    <Compile Remove="wwwroot\Client\sczzss\**" />
+    <Compile Remove="wwwroot\Content\**" />
+    <Content Remove="wwwroot\Client\csxs\**" />
+    <Content Remove="wwwroot\Client\fonxts\**" />
+    <Content Remove="wwwroot\Client\imxages\**" />
+    <Content Remove="wwwroot\Client\jszz\**" />
+    <Content Remove="wwwroot\Client\sczzss\**" />
+    <Content Remove="wwwroot\Content\**" />
+    <EmbeddedResource Remove="wwwroot\Client\csxs\**" />
+    <EmbeddedResource Remove="wwwroot\Client\fonxts\**" />
+    <EmbeddedResource Remove="wwwroot\Client\imxages\**" />
+    <EmbeddedResource Remove="wwwroot\Client\jszz\**" />
+    <EmbeddedResource Remove="wwwroot\Client\sczzss\**" />
+    <EmbeddedResource Remove="wwwroot\Content\**" />
+    <None Remove="wwwroot\Client\csxs\**" />
+    <None Remove="wwwroot\Client\fonxts\**" />
+    <None Remove="wwwroot\Client\imxages\**" />
+    <None Remove="wwwroot\Client\jszz\**" />
+    <None Remove="wwwroot\Client\sczzss\**" />
+    <None Remove="wwwroot\Content\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OA.REPO\OA.REPO.csproj" />
+    <ProjectReference Include="..\OA.Service\OA.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\CustomScripts\AppUtil.js" />
+    <None Include="wwwroot\CustomScripts\ImageManager.js" />
+    <None Include="wwwroot\Scripts\dataTables.bootstrap1.10.10.min.js" />
+    <None Include="wwwroot\Scripts\dataTables.buttons1.4.2.min.js" />
+    <None Include="wwwroot\Scripts\jquery-3.2.1.intellisense.js" />
+    <None Include="wwwroot\Scripts\jquery-3.2.1.js" />
+    <None Include="wwwroot\Scripts\jquery-3.2.1.min.js" />
+    <None Include="wwwroot\Scripts\jquery-3.2.1.min.map" />
+    <None Include="wwwroot\Scripts\jquery-3.2.1.slim.js" />
+    <None Include="wwwroot\Scripts\jquery-3.2.1.slim.min.js" />
+    <None Include="wwwroot\Scripts\jquery-3.2.1.slim.min.map" />
+    <None Include="wwwroot\Scripts\jquery.dataTables.1.10.10.min.js" />
+    <None Include="wwwroot\Scripts\jquery.min.js" />
+    <None Include="wwwroot\Scripts\notify.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\TransactionImage\" />
+    <Folder Include="wwwroot\ProductImage\" />
+  </ItemGroup>
+
+</Project>

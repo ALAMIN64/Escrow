@@ -1,0 +1,66 @@
+﻿@model OA.DATA.Entities.ApplicationUser 
+@{
+    ViewData["Title"] = "Email confirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 50px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+    @*@media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }*@
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+<div class="card" style="padding-top:30px;background-color:#c4d7ff">
+    <div class="card-title">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row" style="align-content: center;">
+            <div class="col-1"></div>
+            <div class="col-10" style="background-color:white;padding: 10px; font-size:small;text-align:center" >
+                <form asp-controller="Account" asp-action="Register" method="post">
+                    <div class="text-center"><h3><strong>Welcome</strong></h3><h5>@Model.FirstName @Model.LastName</h5><h7>to</h7><h4>Payguardex.com</h4></div><br />
+                    <h6><strong>Email verification required.</strong></h6>
+                    <br />
+                    
+                    <div class="form-group">
+                        <h7>We have sent an email with a link</h7>
+                        <p>Please check your email and click on the link to confirm your account.</p>
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>

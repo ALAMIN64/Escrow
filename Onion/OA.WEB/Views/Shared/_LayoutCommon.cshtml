@@ -1,0 +1,226 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<OA.DATA.Entities.ApplicationUser> SignInManager
+@inject UserManager<OA.DATA.Entities.ApplicationUser> UserManager
+@{ var user = await UserManager.GetUserAsync(User); }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pay-Guardex &mdash; @ViewData["Title"]</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="~/Logoff.png" type="image/gif" sizes="16x16">
+
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="~/Client/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="~/Client/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Client/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/Client/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Client/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Client/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="~/Client/css/jquery.fancybox.min.css">
+
+    <link rel="stylesheet" href="~/Client/css/bootstrap-datepicker.css">
+
+    <link rel="stylesheet" href="/Client/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="~/Client/css/aos.css">
+
+    <link rel="stylesheet" href="~/Client/css/style.css">
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/lib/jquery-ui1.12.1.js"></script>
+    <script src="~/CustomScripts/AppUtil.js"></script>
+    <script src="~/CustomScripts/ImageManager.js"></script>
+
+    <style>
+        .contentcenterp {
+            padding: 50px 0px 100px 0px;
+        }
+        .img-circle {
+            border-radius: 20px;
+        }
+        .btn-green {
+            background-color: #29963f;
+            color: white;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+    <div class="site-wrap">
+        <div class="site-mobile-menu site-navbar-target">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+
+        <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <div class="site-logo">
+                        <a href="#" onclick="gotohome()">
+                            <img src="~/TextLogo.png" height="25" />
+                        </a>
+                    </div>
+                    <div>
+                        <nav class="site-navigation position-relative text-right" role="navigation">
+                            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                                <li><a href="#" onclick="gotohome()" class="nav-link">Home</a></li>
+                                <li><a href="#" onclick="gotofeecalculate()" class="nav-link">Fee Calculate</a></li>
+                                <li><a href="#" onclick="findTransaction()" class="nav-link">Find Transaction</a></li>
+                                <li><a href="#" onclick="process()" class="nav-link">How it works?</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="ml-auto">
+                        <nav class="site-navigation position-relative text-right" role="navigation">
+
+                            <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block">
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+
+                            <li class="cta">
+                                <a href="/Transaction/Create" class="nav-link"><span class="btn btn-green">Start a transaction</span></a>
+                            </li>
+                                            <li class="cta">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <img class="img-circle" height="40" src="~/Admin/images.png" />
+                                                    <!--<img class="img-circle" height="40" src="~/pngtree-user-icon-isolated-on-abstract-background-png-image_1824979.jpg" />-->        @*Dropdown link*@
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-xl-left" aria-labelledby="navbarDropdownMenuLink" style="width:300px">
+                                                    <div class="dropdown-item">
+                                                        <img class="img-circle" height="60" src="~/Admin/images.png" />
+                                                        @* <img class="img-circle" height="60" src="~/pngtree-user-icon-isolated-on-abstract-background-png-image_1824979.jpg" />*@
+                                                    </div>
+                                                    <div class="">
+                                                        <a class="dropdown-item" style="color:blue;"><b><i>@user.FirstName @user.LastName</i></b></a>
+                                                        <p class="dropdown-item" style="color:blue;font-size:small"><b>@user.Email</b></p>
+                                                        @if (this.User.IsInRole("Admin"))
+                                                        {
+                                        <a class="dropdown-item" href="#" onclick="btnadminprofile()" style="color:darkcyan"><b>My Profile</b></a> }
+                                    else
+                                    {
+                            <a class="dropdown-item" href="#" onclick="btnprofile()" style="color:darkcyan"><b>My Profile</b></a>}                                                <form class="form-inline" asp-controller="Account" asp-action="Logout" id="formlg">
+                                                            <a href="#" onclick="btnlogout()" class="dropdown-item" style="color:darkcyan">Log out</a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </li> }
+                                                        else
+                                                        {
+
+                                            <li><a href="#" onclick="loginpage()" class="nav-link" style="color:red">Login</a></li>
+                                                            <li><a href="#" onclick="registerpage()" class="nav-link" style="color:red">Signup</a></li>
+}
+
+                            </ul>
+                        </nav>
+                        <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+        @RenderBody()
+        <div style="padding:100px">
+
+        </div>
+        <footer class="footer-section" style="background-color:#01426a">
+            <div class="container" style="color:white">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 style="color:white">Pay Guardex</h3>
+                        <p>Lakeshore House, Ojodu Berger Lagos.</p>
+                        <p>Nigeria</p>
+                        <p>Phone : </p>
+                    </div>
+                    <div class="col-md-3 ml-auto">
+                        <h3 style="color:white">Company</h3>
+                        <ul class="list-unstyled footer-links">
+                            <li><a style="color:white" href="/Home/Index">Home</a></li>
+                            <li><a style="color:white" href="/Home/About">About</a></li>
+                            <li><a style="color:white" href="/Home/Contact">Contact</a></li>
+                            <li><a style="color:white" href="/home/terms">Terms & Conditions</a></li>
+                            <li><a style="color:white" href="/home/privacy">Privacy & Policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <img src="~/TextLogo.png" height="35" width="300" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row pt-5 mt-5 text-center">
+                    <div class="col-md-12">
+                        <div class="border-top pt-5">
+                            <p>
+
+                                Copyright &copy; Pay Guardex
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved <div hidden>| Template by <a href="https://colorlib.com" target="_blank">Colorlib</a></div>
+                                <div hidden>Developed<a hidden href="www.facebook.com/asif.shikder.ar">Asif Shikder</a></div>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+    </div> <!-- .site-wrap -->
+    <script src="~/Client/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/notify.js"></script>
+
+    <script src="~/Client/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Client/js/jquery-ui.js"></script>
+    <script src="~/Client/js/popper.min.js"></script>
+    <script src="~/Client/js/bootstrap.min.js"></script>
+    <script src="~/Client/js/owl.carousel.min.js"></script>
+    <script src="~/Client/js/jquery.stellar.min.js"></script>
+    <script src="~/Client/js/jquery.countdown.min.js"></script>
+    <script src="~/Client/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Client/js/jquery.easing.1.3.js"></script>
+    <script src="~/Client/js/aos.js"></script>
+    <script src="~/Client/js/jquery.fancybox.min.js"></script>
+    <script src="~/Client/js/jquery.sticky.js"></script>
+    <script src="~/Client/js/main.js"></script>
+    <script>
+        function loginpage() {
+            window.location.href = "/Account/Login";
+        }
+        function registerpage() {
+            window.location.href = "/Account/Register";
+        }
+        function gotohome() {
+            window.location.href = "/Home/Index";
+        }
+        function gotofeecalculate() {
+            window.location.href = "/Home/FeeAndPolicy";
+        }
+        function process() {
+            window.location.href = "/Home/Process";
+        }
+        function findTransaction() {
+            window.location.href = "/MyTransaction/FindTransaction";
+        }
+
+        function btnlogout() {
+            $("#formlg").submit();
+        }
+        function btnprofile() {
+            window.location.href = "/Account/Profile";
+        }
+        function btnadminprofile() {
+            window.location.href = "/Account/Profiles";
+        }
+    </script>
+</body>
+</html>

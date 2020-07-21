@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<OA.DATA.Entities.ApplicationUser> SignInManager
+@inject UserManager<OA.DATA.Entities.ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <nav>
+        <ul id="navigation">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li>
+                <a href="#">Page</a>
+                <ul class="submenu">
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="blog_details.html">Blog Details</a></li>
+                    <li><a href="elements.html">Element</a></li>
+                    <li><a href="portfolio_details.html">Portfolio Details</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html"></a></li>
+            <li>
+                <a href="#" style="color:red"><img class="img-circle" height="40" src="~/pngtree-user-icon-isolated-on-abstract-background-png-image_1824979.jpg" />Asif Rabbani</a>
+                <ul class="submenu">
+
+                    <li>
+                        <a class="text-capitalize" style="font-size:8px;color:orangered">asif.shikder.ar@gmail.com</a>
+                    </li>
+                    <li><a href="blog_details.html">My Profile</a></li>
+                    <li>
+                        <a href="#" id="Logoutbtn">Sign Out</a>
+                    </li>
+
+                </ul>
+
+            </li>
+        </ul>
+    </nav>
+}
+else
+{
+    <nav>
+        <ul id="navigation">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li>
+                <a href="#">Page</a>
+                <ul class="submenu">
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="blog_details.html">Blog Details</a></li>
+                    <li><a href="elements.html">Element</a></li>
+                    <li><a href="portfolio_details.html">Portfolio Details</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/Account/login">Login </a></li>
+            <li><a href="/Account/Register"> Register </a></li>
+        </ul>
+    </nav>
+}

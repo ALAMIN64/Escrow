@@ -1,0 +1,96 @@
+﻿@model IEnumerable<OA.WEB.Models.ViewModel.TransactionUserVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<head>
+    <style>
+        .intro-section1 {
+  position: relative; }
+            .intro-section1, .intro-section1 .container .row {
+                height: 13vh;
+                min-height: 90px;
+                background-color: #01426a;
+            }
+    .intro-section:before {
+        content: "";
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        border-bottom-right-radius: 0px;
+    }
+    @*@media (max-width: 991.98px) {
+      .intro-section:before {
+        width: 100%; } }*@
+  .intro-section1 h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff; }
+  .intro-section1 p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    max-width: 400px; }
+
+    </style>
+</head>
+<div class="intro-section1" id="home-section">
+    <div class="container">
+        <div class="row contentcenterp ">
+        </div>
+    </div>
+</div>
+
+<div class="card" style="padding-top:30px;background-color:#e4f4fb">
+    <div class="card-title">
+        <div class="col-sm-12">
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row" style="align-content: center;">
+            <div class="col-1"></div>
+            <div class="col-10" style="background-color:white;padding: 10px;">
+                <div>
+                    <h4 style="color:darkblue"><b>My Transactions</b></h4>
+                    <hr />
+                </div>
+                <div style="overflow-x:auto; font-size:13px">
+                    @if (Model.Count() == 0)
+                    {
+                        <p>No transaction found!</p>
+                    }
+                    else
+                    {
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr style="height:10px;background-color:#cbcbcb">
+                                    <th>No.</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Role</th>
+                                    <th>Transaction Details</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ID</td>
+                                        <td>@item.startDate.Value.ToString("dddd, dd MMMM yyyy")</td>
+                                        <td>@item.Amount</td>
+                                        <td>@item.UserTypeInTransaction</td>
+                                        <td><h6>@item.ItemName</h6><p style="font-size:x-small">@item.Email</p></td>
+
+                                        <td>@Html.Raw(item.status)@Html.ActionLink("Details", "ViewDetails", "Transaction", new { id = item.ID })</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>

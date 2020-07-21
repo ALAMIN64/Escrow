@@ -1,0 +1,68 @@
+﻿@model OA.DATA.Entities.Payment
+@{
+    ViewData["Title"] = "ViewDetails";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"> Payment Deatails</h4>
+            <p class="card-description">
+            </p>
+            <div class="pt-3">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-12">Tranasaction Link ID : @Model.LinkID</div>
+                    </div><br />
+                    <div class="form-group">
+                        <div class="col-12"> Amount : @Model.Amount</div>
+                    </div><br />
+                    <div class="form-group">
+
+                        <div class="col-12">Account Number : @Model.AccountNumber</div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+
+                        <div class="col-12">Bank Name : @Model.BankName</div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+
+                        <div class="col-12">Description :@Model.Description</div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+
+                        <div class="col-12">
+                            <img src="@Url.Content(Model.DocumentsUrl)" height="200" width="320" />
+                            <img src="@Url.Content(Model.DocumentsUrl2)" height="200" width="320" />
+                            <img src="@Url.Content(Model.DocumentsUrl3)" height="200" width="320" />
+                        </div>
+                    </div><br />
+
+                </div>
+
+            </div> <div class="pt-3">
+                <div class="row">
+                    <div class="col-8">
+                        <form asp-controller="ManagePayment" asp-action="UpdateStatus" method="post" style="width:500px">
+                            <div class="form-group">
+                                @Html.HiddenFor(s => s.Id)
+                                <label class="control-label">Update Status</label>
+                                @Html.DropDownList("Status", (SelectList)ViewBag.StatusEs, "Select Status", new { @class = "form-control", @required = "required" })
+                            </div>
+                            <br />
+                            <button type="submit" class="btn btn-block btn-danger">Update</button>
+                        </form>
+                    </div>
+                    <div class="col-4">
+                        <div style="padding:10px">
+                            <h4  class="text-danger" style="color:red">Please be sure that all the informations are correct.</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
